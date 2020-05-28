@@ -12,6 +12,7 @@ int tries = 0;
 int guess = 0;
 int secretNumber = 0;
 bool humanGuessing = true;
+int guessStatus = 1;
 
 bool chooseGameType() {
 
@@ -57,8 +58,30 @@ int getGuess() {
 
   } else {
 
+    int upperBound = 100;
+    int newUpperBound = 0;
+    int lowerBound = 0;
+    int newLowerBound = 100;
+
     sleep(2);
-  	guess = rand() % 100 + 1;
+    if (guessStatus > 0) { // was trying to make the computer's guesses better but it doesn't seem to be working
+
+      newUpperBound = guess - 1;
+      if ( newUpperBound < upperBound ) {
+        upperBound = newUpperBound;
+      }
+      guess = rand() % upperBound + 1;
+
+    } else {
+
+      newLowerBound = guess + 1;
+      if ( newLowerBound > lowerBound ) {
+        lowerBound = newLowerBound;
+      }
+      guess = rand() % (100-lowerBound) + lowerBound;
+
+    }
+
     cout << guess << endl;
 
   }
@@ -82,10 +105,12 @@ int main() {
 
 		if (guess > secretNumber) {
 
+      guessStatus = 1;
 			cout << "Too high!\n\n";
 
 		} else if (guess < secretNumber) {
 
+      guessStatus = -1;
 			cout << "Too low!\n\n";
 
 		} else {
