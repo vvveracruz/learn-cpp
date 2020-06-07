@@ -9,6 +9,7 @@
 #include <ctime>
 #include <cctype>
 #include <unistd.h>
+#include <fstream>
 
 using namespace std;
 
@@ -17,6 +18,24 @@ const int DICTIONARY_SIZE = 5;
 const int MESSAGE_WIDTH = 50;
 const int MESSAGE_BREAK = 15;
 const string WORDS[DICTIONARY_SIZE] = {"HELLO", "FISH", "TEMPORARY", "JOKER", "BEDTIME"};
+
+vector<string> readCSV( string filepath) {
+
+  ifstream fin;
+  fin.open(filepath);
+
+  vector<string> dictionary;
+  string line;
+
+  while( !fin.eof() ){
+
+    fin >> line;
+    dictionary.push_back(line);
+
+  }
+
+  return dictionary;
+}
 
 vector<string> createDictionary() {
 
@@ -202,15 +221,17 @@ string checkGuess( char guess, string secretWord, string guessedSoFar ) {
   return guessedSoFar;
 }
 
-void endGame( int guessesLeft ) {
+void endGame( int guessesLeft, string secretWord, string guessedSoFar ) {
 
-  if ( guessesLeft == 0 ) {
+  if ( guessesLeft == 0 && guessedSoFar != secretWord ) {
 
     cout << endl;
     centerString( "YOU LOST!", MESSAGE_WIDTH );
     cout << endl;
     cout << endl;
-    centerString( "You ran out of guesses.", MESSAGE_WIDTH);
+    string s = "You ran out of guesses. The word was ";
+    s += secretWord;
+    centerString(s, MESSAGE_WIDTH);
     cout << endl;
 
   } else {
@@ -226,7 +247,7 @@ void endGame( int guessesLeft ) {
 
 int main() {
 
-  vector<string> dictionary = createDictionary();
+  vector<string> dictionary = readCSV( "words.csv" );
 
   //  randomising dictionary order
   srand( static_cast<unsigned int>( time(0) ) );
@@ -259,7 +280,8 @@ int main() {
   }
 
   messageBreak();
-  endGame( guessesLeft );
+  endGame( guessesLeft, SECRET_WORD, guessedSoFar );
+  messageBreak();
 
   return 0;
 }
