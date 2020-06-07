@@ -14,10 +14,8 @@
 using namespace std;
 
 const int MAX_GUESSES = 8;
-const int DICTIONARY_SIZE = 5;
 const int MESSAGE_WIDTH = 50;
 const int MESSAGE_BREAK = 15;
-const string WORDS[DICTIONARY_SIZE] = {"HELLO", "FISH", "TEMPORARY", "JOKER", "BEDTIME"};
 
 vector<string> readCSV( string filepath) {
 
@@ -35,18 +33,6 @@ vector<string> readCSV( string filepath) {
   }
 
   return dictionary;
-}
-
-vector<string> createDictionary() {
-
-  vector<string> dictionary;
-
-  for ( int i = 0; i < DICTIONARY_SIZE; i++ ) {
-    dictionary.push_back( WORDS[i] );
-  }
-
-  return dictionary;
-
 }
 
 void centerString( string message, int messageWidth ) {
@@ -245,16 +231,19 @@ void endGame( int guessesLeft, string secretWord, string guessedSoFar ) {
 
 }
 
+string randomiseSecretWord( vector<string> dictionary ) {
+
+  srand( static_cast<unsigned int>( time(0) ) );
+  int i = rand() % dictionary.size() + 1;
+
+  return dictionary[i];
+}
+
 int main() {
 
   vector<string> dictionary = readCSV( "words.csv" );
 
-  //  randomising dictionary order
-  srand( static_cast<unsigned int>( time(0) ) );
-  random_shuffle( dictionary.begin(), dictionary.end() );
-
-  //  chose secret word
-  const string SECRET_WORD = dictionary[0];
+  const string SECRET_WORD = randomiseSecretWord( dictionary );
 
   //  initialise variables
   int guessesLeft = MAX_GUESSES;
