@@ -17,7 +17,7 @@ const int MAX_GUESSES = 8;
 const int MESSAGE_WIDTH = 50;
 const int MESSAGE_BREAK = 15;
 
-vector<string> readCSV( string filepath) {
+vector<string> readCSV( string filepath ) {
 
   ifstream fin;
   fin.open(filepath);
@@ -59,12 +59,11 @@ void centerString( string message, int messageWidth ) {
   } else {
 
     for ( int i = 0; i < sides + 1; i ++) {
+
       cout << " ";
+      
     }
-
   }
-
-
 }
 
 void welcomeMessage() {
