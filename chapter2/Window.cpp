@@ -1,8 +1,5 @@
 #include "Window.hpp"
-
-#define BUTTON_FULLSCREEN F5
-#define WINDOW_HEIGHT 480
-#define WINDOW_WIDTH 640
+#include "DEFINITIONS.cpp"
 
 /*----    CONSTRUCTOR & DESTRUCTOR    ----*/
 

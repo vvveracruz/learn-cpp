@@ -1,4 +1,4 @@
-SOURCES = main.cpp Window.cpp
+SOURCES = main.cpp Window.cpp Game.cpp
 OBJECTS = $(SOURCES:.c=.o)
 
 run:
