@@ -15,6 +15,10 @@ Game::~Game() { }
 
 /*----    HELPER METHODS    ----*/
 
+void Game::HandleInput() { }
+
+Window* Game::GetWindow() { }
+
 void Game::Update() {
 
   m_window.Update();
