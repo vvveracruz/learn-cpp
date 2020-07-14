@@ -13,7 +13,7 @@ Game::Game(): m_window( WINDOW_NAME, sf::Vector2u( WINDOW_WIDTH, WINDOW_HEIGHT )
 
 Game::~Game() { }
 
-/*----    HELPER METHODS    ----*/
+/*----    PUBLIC METHODS    ----*/
 
 void Game::HandleInput() { }
 
@@ -25,6 +25,28 @@ void Game::Update() {
   MoveFruit();
 
 }
+
+void Game::Render() {
+
+  m_window.BeginDraw();
+  m_window.Draw( m_fruit );
+  m_window.EndDraw();
+
+}
+
+sf::Time Game::GetElapsed() {
+
+  return m_elapsed;
+
+}
+
+void Game::RestartClock() {
+
+  m_elapsed = m_clock.restart();
+
+}
+
+/*----    PRIVATE METHODS    ----*/
 
 void Game::MoveFruit() {
 
@@ -43,16 +65,10 @@ void Game::MoveFruit() {
 
   }
 
+  float fElapsed = m_elapsed.asSeconds();
+
   m_fruit.setPosition(
-    m_fruit.getPosition().x + m_increment.x,
-    m_fruit.getPosition().y + m_increment.y );
-
-}
-
-void Game::Render() {
-
-  m_window.BeginDraw();
-  m_window.Draw( m_fruit );
-  m_window.EndDraw();
+    m_fruit.getPosition().x + ( m_increment.x * fElapsed ),
+    m_fruit.getPosition().y + ( m_increment.y * fElapsed ) );
 
 }

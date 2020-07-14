@@ -14,6 +14,10 @@ int main( int argc, char const *argv[] ) {
     game.Update();
     game.Render();
 
+    // sf::sleep( sf::seconds( 0.2 ) );
+
+    game.RestartClock();
+
   }
 
   return 0;

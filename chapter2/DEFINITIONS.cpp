@@ -6,5 +6,5 @@
 
 #define FRUIT_FILEPATH "../assets/fruit.png"
 
-#define SPEED_X 4
-#define SPEED_Y 4
+#define SPEED_X 400 // pixels per second
+#define SPEED_Y 400
