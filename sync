@@ -1,0 +1,14 @@
+#!/bin/zsh
+
+gstatus=`git status --porcelain`
+
+if [ ${#gstatus} -ne 0 ]
+then
+
+    commit_message="Automated commit\n$gstatus"
+    git add -A
+    git commit -m $commit_message
+	git pull
+    git push
+
+fi
