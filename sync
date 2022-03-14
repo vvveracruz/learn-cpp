@@ -6,7 +6,7 @@ if [ ${#gstatus} -ne 0 ]
 then
 
     commit_message="Automated commit 
-    $gstatus"
+$gstatus"
     git add -A
     git commit -m $commit_message
 	git pull
