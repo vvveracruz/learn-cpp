@@ -5,7 +5,8 @@ gstatus=`git status --porcelain`
 if [ ${#gstatus} -ne 0 ]
 then
 
-    commit_message="Automated commit\n$gstatus"
+    commit_message="Automated commit 
+    $gstatus"
     git add -A
     git commit -m $commit_message
 	git pull
