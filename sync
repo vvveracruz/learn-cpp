@@ -7,9 +7,9 @@ then
 
     commit_message="Automated commit 
 $gstatus"
-    git add -A
+    git add --all
     git commit -m $commit_message
-	git pull
+	git pull --rebase
     git push
 
 fi
